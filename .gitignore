@@ -1,0 +1,5 @@
+# .gitignore
+.env           # Your environment file
+.env.local     # Local overrides
+.env*.local    # All .env variants
+secrets/       # If you have a secrets directory

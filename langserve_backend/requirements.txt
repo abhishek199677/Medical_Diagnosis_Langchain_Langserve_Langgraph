@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+langserve
+langgraph
+langchain
+requests
+streamlit
+python-dotenv
+sse_starlette>=1.6.5
+
