@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends
 from langserve import add_routes
 from disgonostics_graph import build_graph
 
