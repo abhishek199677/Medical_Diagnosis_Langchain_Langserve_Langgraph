@@ -1,6 +1,8 @@
 from fastapi import FastAPI, Depends
 from langserve import add_routes
 from disgonostics_graph import build_graph
+from fastapi.responses import RedirectResponse
+
 
 app = FastAPI()
 graph = build_graph()
@@ -14,10 +16,15 @@ API_KEY = "secret-token-123"  # change this to a strong key or read from ENV
 
 api_key_header = APIKeyHeader(name=API_KEY_NAME, auto_error=False)
 
+@app.get("/")
+async def root():
+    return RedirectResponse(url="/diagnose/playground/")
+
 def verify_api_key(api_key: str = Security(api_key_header)):
     if api_key != f"Bearer {API_KEY}":
         raise HTTPException(status_code=403, detail="Unauthorized access")
     return api_key
+
 
 
 add_routes(app,graph,path="/diagnose",dependencies = [Depends(verify_api_key)])
